@@ -16,6 +16,13 @@ router.get("/:postId", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+//delete a specific post
+router.delete("/:postId", (req, res) => {
+  Post.remove({ _id: req.params.postId })
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
+});
+
 //submits a post to the database
 router.post("/", (req, res) => {
   const post = new Post({

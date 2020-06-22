@@ -23,6 +23,16 @@ router.delete("/:postId", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+//updates a post
+router.patch("/:postId", (req, res) => {
+  Post.updateOne(
+    { _id: req.params.postId },
+    { $set: { description: req.body.description } }
+  )
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
+});
+
 //submits a post to the database
 router.post("/", (req, res) => {
   const post = new Post({

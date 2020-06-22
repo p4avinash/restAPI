@@ -9,6 +9,13 @@ router.get("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+//getting a specific post form the database
+router.get("/:postId", (req, res) => {
+  const specificPost = Post.findById(req.params.postId)
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
+});
+
 //submits a post to the database
 router.post("/", (req, res) => {
   const post = new Post({

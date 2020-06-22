@@ -1,18 +1,15 @@
 const express = require("express");
 const Post = require("../models/Post");
-const { response } = require("express");
 const router = express.Router();
 
-//posts homepage
+//getting all the posts form the database
 router.get("/", (req, res) => {
-  res.send("This is the Post page..!!");
+  const posts = Post.find()
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
 });
 
-//avinash posts
-router.get("/avi", (req, res) => {
-  res.send("Avinash is awesome..!!");
-});
-
+//submits a post to the database
 router.post("/", (req, res) => {
   const post = new Post({
     title: req.body.title,
